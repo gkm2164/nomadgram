@@ -26,7 +26,7 @@ class Feed(APIView):
         return Response(serializer.data)
 
 class LikeImage(APIView):
-    def get(self, request, image_id, format = None):
+    def post(self, request, image_id, format = None):
         user = request.user
 
         try:
@@ -50,4 +50,9 @@ class LikeImage(APIView):
 
             new_like.save()
 
-            return Response(status = status.HTTP_200_OK)
+            return Response(status = status.HTTP_201_CREATED)
+
+class CommentOnImage(APIView):
+    def post(self, request, image_id, format = None):
+        print(request.data)
+        return Response(status = status.HTTP_200_OK)
